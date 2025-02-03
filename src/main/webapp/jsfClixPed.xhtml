@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="fr1">
+            <p:dataTable value="#{control1.liscli}" var="cli" paginator="true" rows="5">
+                <p:column headerText="codigo">
+                    <p:outputLabel value="#{cli.idUsuario}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <p:outputLabel value="#{cli.nombre}"/>
+                </p:column>
+                <p:column headerText="Ver">
+                    <p:commandLink value="Facturas" action="#{control1.consulta(cli)}" update=":fr2"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form id="fr2">
+            <p:panelGrid columns="1">
+                <p:outputLabel value="Nombre: #{control1.nombre}" style="color:blue;"/>
+                <p:dataTable value="#{control1.lisped}" var="ped">
+                <p:column headerText="Factura">
+                    <p:outputLabel value="#{ped.id}"/>
+                </p:column>
+                <p:column headerText="Fecha">
+                    <p:outputLabel value="#{ped.fecha}"/>
+                </p:column>
+                <p:column headerText="Ver">
+                    <p:commandLink value="Detalle" action="#{control1.consulta2(ped)}" update=":fr3"/>
+                </p:column>
+            </p:dataTable>
+            </p:panelGrid>
+        </h:form>
+        <h:form id="fr3">
+            <p:panelGrid columns="1">
+                <p:outputLabel value="Factura: #{control1.facid}" style="color:blue;"/>
+                <p:dataTable value="#{control1.lisdet2}" var="det">
+                    <p:column headerText="codigo">
+                        <p:outputLabel value="#{det.codigo}"/>
+                    </p:column>
+                    <p:column headerText="descripcion">
+                        <p:outputLabel value="#{det.desc}"/>
+                    </p:column>
+                    <p:column headerText="Cantidad">
+                        <p:outputLabel value="#{det.cantidad}"/>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <p:outputLabel value="#{det.precio}"/>
+                    </p:column>
+                    <p:columnGroup type="footer">
+                        <p:row>
+                            <p:column colspan="3" footerText="Total Pago"/>
+                            <p:column footerText="#{control1.total}"/>
+                        </p:row>
+                    </p:columnGroup>
+                </p:dataTable>
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
